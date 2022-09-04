@@ -7,6 +7,8 @@ These instructions explain how to run Zigbee2MQTT on Linux.
 
 For the sake of simplicity this guide assumes running on a Raspberry Pi 4 with Raspbian Stretch Lite, but it should work on any Linux machine.
 
+Therefore the user `pi` is used the following examples, but the user may differ between distributions e.g. `openhabian` should be used on Openhabian.
+
 Before starting make sure you have an MQTT broker installed on your system.
 There are many tutorials available on how to do this, [example](https://randomnerdtutorials.com/how-to-install-mosquitto-broker-on-raspberry-pi/).
 Mosquitto is the recommended MQTT broker but others should also work fine.
@@ -28,19 +30,22 @@ lrwxrwxrwx. 1 root root 13 Oct 19 19:26 usb-Texas_Instruments_TI_CC2531_USB_CDC_
 
 ## Installing
 ```bash
-# Install Node.js and required dependencies:
-# - It is recommended to install Node 16 from the official Node repository. Check https://github.com/nodesource/distributions/blob/master/README.md on how to do this.
-# - Older i386 hardware can work with [unofficial-builds.nodejs.org](https://unofficial-builds.nodejs.org/download/release/v16.15.0/ e.g. Version 16.15.0 should work.
-sudo apt-get install -y nodejs npm git make g++ gcc
+# Set up Node.js repository and install Node.js + required dependencies
+# NOTE: Older i386 hardware can work with [unofficial-builds.nodejs.org](https://unofficial-builds.nodejs.org/download/release/v16.15.0/ e.g. Version 16.15.0 should work.
+sudo curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash -
+sudo apt-get install -y nodejs git make g++ gcc
 
 # Verify that the correct nodejs and npm (automatically installed with nodejs)
 # version has been installed
 node --version  # Should output v14.X, V16.x, V17.x or V18.X
 npm --version  # Should output 6.X, 7.X or 8.X
 
+# Create a directory for zigbee2mqtt and set your user as owner of it
+sudo mkdir /opt/zigbee2mqtt
+sudo chown -R ${USER}: /opt/zigbee2mqtt
+
 # Clone Zigbee2MQTT repository
-git clone https://github.com/Koenkk/zigbee2mqtt.git
-sudo mv zigbee2mqtt /opt/zigbee2mqtt
+git clone --depth 1 https://github.com/Koenkk/zigbee2mqtt.git /opt/zigbee2mqtt
 
 # Install dependencies (as user "pi")
 cd /opt/zigbee2mqtt
@@ -87,6 +92,12 @@ It is recommended to use a custom network key. This can be done by adding the fo
 ```yaml
 advanced:
     network_key: GENERATE
+```
+
+To enable the frontend add the following (see the [Frontend](../configuration/frontend.md) page for more settings):
+
+```yaml
+frontend: true
 ```
 
 Save the file and exit.

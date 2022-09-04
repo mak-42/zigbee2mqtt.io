@@ -4,6 +4,12 @@ next: ../configuration/
 
 # Windows
 
+## Install a USB-to-UART Bridge Virtual COM Port driver
+In order to be able to communicate with your USB device over a virtual COM port, you might need a driver for your OS in order for it to be able to be found by your flashing software.
+
+- For CP210x based chipsets, there is a driver available at [Silicon Labs' website](https://www.silabs.com/developers/usb-to-uart-bridge-vcp-drivers).
+- For CC1352/CC2652/CC2538 based chipsets, have a look at [FTDI chip's website](https://ftdichip.com/drivers/vcp-drivers/) for drivers.
+
 ## Determine which COM port is assigned to your device
 
 1. Connect your sniffer device
@@ -25,7 +31,7 @@ next: ../configuration/
 1. Choose a suitable directory for Zigbee2MQTT and copy all the files from the [Zigbee2MQTT repository](https://github.com/koenkk/zigbee2mqtt)
     * if you prefer to use git (which you should), just clone the whole repository
         ```bash
-        git clone git@github.com:Koenkk/zigbee2mqtt.git
+        git clone --depth 1 git@github.com:Koenkk/zigbee2mqtt.git
         ```
     * otherwise use the green `Clone or download` button to download the zip archive, then extract it
 1. Change to the newly created directory and install dependencies with Node.js own package manager `npm`

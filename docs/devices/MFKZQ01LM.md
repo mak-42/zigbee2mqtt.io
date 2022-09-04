@@ -18,7 +18,7 @@ pageClass: device-page
 | Model | MFKZQ01LM  |
 | Vendor  | Xiaomi  |
 | Description | Mi/Aqara smart home cube |
-| Exposes | battery, voltage, action_angle, device_temperature, power_outage_count, action_from_side, action_side, action_to_side, action, linkquality |
+| Exposes | battery, voltage, action_angle, device_temperature, power_outage_count, action_from_side, action_side, action_to_side, side, action, linkquality |
 | Picture | ![Xiaomi MFKZQ01LM](https://www.zigbee2mqtt.io/images/devices/MFKZQ01LM.jpg) |
 
 
@@ -46,8 +46,6 @@ More detailed information about this can be found [here](https://community.hubit
 
 ## Options
 *[How to use device type specific configuration](../guide/configuration/devices-groups.md#specific-device-options)*
-
-* `device_temperature_precision`: Number of digits after decimal point for device_temperature, takes into effect on next report of device. The value must be a number with a minimum value of `0` and with a with a maximum value of `3`
 
 * `device_temperature_calibration`: Calibrates the device_temperature value (absolute offset), takes into effect on next report of device. The value must be a number.
 
@@ -82,7 +80,7 @@ It's not possible to read (`/get`) or write (`/set`) this value.
 The unit of this value is `°C`.
 
 ### Power_outage_count (numeric)
-Number of power outages (since last pairing).
+Number of power outages.
 Value can be found in the published state on the `power_outage_count` property.
 It's not possible to read (`/get`) or write (`/set`) this value.
 
@@ -101,6 +99,12 @@ The minimal value is `0` and the maximum value is `6`.
 ### Action_to_side (numeric)
 Side of the cube.
 Value can be found in the published state on the `action_to_side` property.
+It's not possible to read (`/get`) or write (`/set`) this value.
+The minimal value is `0` and the maximum value is `6`.
+
+### Side (numeric)
+Side of the cube.
+Value can be found in the published state on the `side` property.
 It's not possible to read (`/get`) or write (`/set`) this value.
 The minimal value is `0` and the maximum value is `6`.
 
